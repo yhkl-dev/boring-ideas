@@ -1,52 +1,66 @@
 import { PrismaClient } from '@prisma/client';
-
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
-import { Card, CardTitle, CardHeader, CardFooter, CardContent } from "@/components/ui/card"
+} from "@/components/ui/carousel";
+import { Card, CardTitle, CardHeader, CardFooter, CardContent } from "@/components/ui/card";
+import { Button } from '@/components/ui/button';
 import Header from '@/components/ui/header';
-
-// const prisma = new PrismaClient();
+import Footer from '@/components/ui/footer';
+const prisma = new PrismaClient();
 
 const Home = async () => {
-
-  // const ideas = await prisma.idea.findMany();
-  const ideas = [
- { id: 1, title: "test", description: "aaaa" },
- { id: 2, title: "bbb", description: "bbbb"}
-  ]
+  const ideas = await prisma.idea.findMany();
 
   return (
     <>
-    <Header></Header>
-    <div className="flex flex-col items-center">
-        <Carousel className="w-full max-w-xs sm:max-w-xl">
-        <CarouselContent>
-          {ideas.map((idea, index) => (
-            <CarouselItem key={index}>
-              <div className="p-1">
-                <Card>
-                  <CardHeader> this is header</CardHeader>
+      <Header />
+      <main className="flex  flex-col  mx-auto items-center">
+        <Button className="mb-4">Post New Idea</Button>
+        <Carousel className="w-full max-w-4xl h-fit">
+          <CarouselContent>
+            {ideas.map((idea) => (
+              <CarouselItem key={idea.id}>
+                <Card className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out  h-fit">
+                  <CardHeader>
+                    <Avatar>
+                      {/* <AvatarImage src={idea.creatorAvatarUrl} alt={idea.creatorUsername} /> */}
+                      <AvatarFallback>LVG</AvatarFallback>
+                    </Avatar>
+                  </CardHeader>
                   <CardTitle className="flex justify-center">{idea.title}</CardTitle>
-                  <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <CardContent>
                     {idea.description}
                   </CardContent>
-                  <CardFooter>this is footer</CardFooter>
+                  <CardFooter className="flex justify-between">
+                    <div className="flex space-x-2">
+                      <Button className="text-green-500">↑</Button>
+                      <Button className="text-red-500">↓</Button>
+                    </div>
+                    <div className="flex space-x-2">
+                      <Button>Share</Button>
+                      <Button>Comment</Button>
+                    </div>
+                  </CardFooter>
                 </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-    </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </main>
+      <Footer />
     </>
-  )
+  );
 };
 
 export default Home;

@@ -13,9 +13,56 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+model User {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  email       String    @unique
+  name        String
+  githubId    String?   @unique
+  googleId    String?   @unique
+  createdAt   DateTime  @default(now())
+  ideas       Idea[]
+  votes       Vote[]
+  comments    Comment[]
+  authProvider AuthProvider
+}
+
 model Idea {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   description String
-  createdAt   DateTime @default(now())
+  createdAt   DateTime  @default(now())
+  authorId    String    @db.ObjectId
+  author      User      @relation(fields: [authorId], references: [id])
+  votes       Vote[]
+  comments    Comment[] // comments for current idea
+}
+
+model Comment {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  content     String    // comment content
+  userId      String    @db.ObjectId
+  user        User      @relation(fields: [userId], references: [id])
+  ideaId      String    @db.ObjectId
+  idea        Idea      @relation(fields: [ideaId], references: [id])
+  createdAt   DateTime  @default(now())
+  parentId    String?   @db.ObjectId
+  parent      Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction) // 父评论
+  replies     Comment[] @relation("CommentReplies")
+}
+
+model Vote {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  boredomLevel Int      // bored dom level
+  userId       String   @db.ObjectId
+  user         User     @relation(fields: [userId], references: [id])
+  ideaId       String   @db.ObjectId
+  idea         Idea     @relation(fields: [ideaId], references: [id])
+  createdAt    DateTime @default(now())
+}
+
+enum AuthProvider {
+  GITHUB
+  GOOGLE
+  EMAIL
 }

@@ -1,3 +1,6 @@
+import Header from "@/components/ui/header";
+import Footer from "@/components/ui/footer";
+import { Button } from "@/components/ui/button";
 import { PrismaClient } from '@prisma/client';
 import {
   Avatar,
@@ -12,55 +15,72 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardTitle, CardHeader, CardFooter, CardContent } from "@/components/ui/card";
-import { Button } from '@/components/ui/button';
-import Header from '@/components/ui/header';
-import Footer from '@/components/ui/footer';
+
 const prisma = new PrismaClient();
 
-const Home = async () => {
+export default async function Home() {
+
   const ideas = await prisma.idea.findMany();
 
   return (
-    <>
-      <Header />
-      <main className="flex  flex-col  mx-auto items-center">
-        <Button className="mb-4">Post New Idea</Button>
-        <Carousel className="w-full max-w-4xl h-fit">
-          <CarouselContent>
-            {ideas.map((idea) => (
-              <CarouselItem key={idea.id}>
-                <Card className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out  h-fit">
-                  <CardHeader>
-                    <Avatar>
-                      {/* <AvatarImage src={idea.creatorAvatarUrl} alt={idea.creatorUsername} /> */}
-                      <AvatarFallback>LVG</AvatarFallback>
-                    </Avatar>
-                  </CardHeader>
-                  <CardTitle className="flex justify-center">{idea.title}</CardTitle>
-                  <CardContent>
-                    {idea.description}
-                  </CardContent>
-                  <CardFooter className="flex justify-between">
-                    <div className="flex space-x-2">
-                      <Button className="text-green-500">↑</Button>
-                      <Button className="text-red-500">↓</Button>
-                    </div>
-                    <div className="flex space-x-2">
-                      <Button>Share</Button>
-                      <Button>Comment</Button>
-                    </div>
-                  </CardFooter>
-                </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      </main>
-      <Footer />
-    </>
+    <div className="flex flex-col h-screen">
+      <Header></Header>
+      <main className="flex flex-grow justify-between items-center">
+        <div className="px-16 grid grid-cols-3 gap-2 justify-center">
+          <div className="col-span-1 justify-center">
+            <div className="col-span-1 justify-center">
+              <div className="font-bold text-black text-6xl text-wrap mb-4">Unite in boredom & vote together</div>
+              <p className="text-xl font-light mb-4">Discover the most boring ideas and vote on them.</p>
+              <Button className="border rounded-full bg-red-600 text-white hover:bg-red-300 text-sm mt-4">Explore Now</Button>
+            </div>
+          </div>
+          <div className="col-span-2">
+            <div className="relative w-full mx-auto">
+              <div className="bg-red-500 w-2/3 h-80 rounded-lg shadow-lg  absolute top-0 right-0">
+              </div>
+              <div className="bg-slate-600 w-2/3 h-80 rounded-lg shadow-lg absolute top-8 right-8">
+                <Carousel className="w-full h-full">
+                  <CarouselContent>
+                    {/* {Array.from({ length: 5 }).map((_, index) => (
+                      <CarouselItem key={index} className="w-full h-full">
+                        <div className="p-1">
+                          <Card>
+                            <CardContent className="flex items-center justify-center ">
+                              <span className="text-4xl font-semibold">{index + 1}</span>
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </CarouselItem>
+                    ))} */}
+                  {/* {ideas.map((idea) => (
+                    <CarouselItem key={idea.id}>
+                      <Card>
+                        <CardHeader>
+                          <Avatar>
+                            <AvatarFallback>LVG</AvatarFallback>
+                          </Avatar>
+                        </CardHeader>
+                        <CardTitle className="flex justify-center">{idea.title}</CardTitle>
+                        <CardContent>
+                          {idea.description}
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  ))} */}
+                </CarouselContent>
+              </Carousel>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main >
+        <div className="flex flex-cols-2 items-center h-40 bg-red-600 justify-center">
+        <div className="text-white text-lg">
+          &ldquo;BoreBoard is the epitome of boredom. Join us in celebrating the mundane!&ldquo;
+            <p className="text-white text-center text-sm mt-2">— yhkl</p>
+        </div>
+      </div>
+      <Footer></Footer>
+    </div>
   );
-};
-
-export default Home;
+}

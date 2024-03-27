@@ -43,7 +43,7 @@ export default function AuthenticationPage() {
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
-                &ldquo;Life is what happens when you're busy making other plans.&rdquo;
+                &ldquo;Life is what happens when you&apos;re busy making other plans.&rdquo;
               </p>
               <footer className="text-sm">John Lennon</footer>
             </blockquote>

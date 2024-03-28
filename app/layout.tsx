@@ -10,7 +10,19 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Boring ideas",
   description: "share and browse boring ideas",
-  keywords: "boring ideas bored creative"
+  keywords: [
+    "boring",
+    "bored",
+    "boring ideas",
+    "creative",
+  ],
+  creator: "yhkl-dev",
+  authors: [
+    {
+      name: "yhkl",
+      url: "https://github.com/yhkl-dev",
+    },
+  ],
 };
 
 export default async function RootLayout({
@@ -19,11 +31,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  // const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
-      {/* <Provider session={session}>{children}</Provider> */}
-      <body className={inter.className}>{children}</body>
+      <Provider session={session}>{children}</Provider>
+      {/* <body className={inter.className}>{children}</body> */}
     </html>
   );
 }

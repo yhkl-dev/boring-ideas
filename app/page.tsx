@@ -7,6 +7,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
+import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -15,72 +16,35 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardTitle, CardHeader, CardFooter, CardContent } from "@/components/ui/card";
+import UnsplashBackground from "@/components/unplashBackgroud";
+import fetchUnsplashBackground from "@/lib/unplash";
+import { url } from "inspector";
 
 const prisma = new PrismaClient();
 
 export default async function Home() {
 
   const ideas = await prisma.idea.findMany();
+  const bgurl: string = await fetchUnsplashBackground();
 
   return (
     <div className="flex flex-col h-screen">
-      <Header></Header>
-      <main className="flex flex-grow justify-between items-center">
-        <div className="px-16 grid grid-cols-3 gap-2 justify-center">
-          <div className="col-span-1 justify-center">
-            <div className="col-span-1 justify-center">
-              <div className="font-bold text-black text-6xl text-wrap mb-4">Unite in boredom & vote together</div>
-              <p className="text-xl font-light mb-4">Discover the most boring ideas and vote on them.</p>
-              <Button className="border rounded-full bg-red-600 text-white hover:bg-red-300 text-sm mt-4">Explore Now</Button>
-            </div>
-          </div>
-          <div className="col-span-2">
-            <div className="relative w-full mx-auto">
-              <div className="bg-red-500 w-2/3 h-80 rounded-lg shadow-lg  absolute top-0 right-0">
-              </div>
-              <div className="bg-slate-600 w-2/3 h-80 rounded-lg shadow-lg absolute top-8 right-8">
-                <Carousel className="w-full h-full">
-                  <CarouselContent>
-                    {/* {Array.from({ length: 5 }).map((_, index) => (
-                      <CarouselItem key={index} className="w-full h-full">
-                        <div className="p-1">
-                          <Card>
-                            <CardContent className="flex items-center justify-center ">
-                              <span className="text-4xl font-semibold">{index + 1}</span>
-                            </CardContent>
-                          </Card>
-                        </div>
-                      </CarouselItem>
-                    ))} */}
-                  {/* {ideas.map((idea) => (
-                    <CarouselItem key={idea.id}>
-                      <Card>
-                        <CardHeader>
-                          <Avatar>
-                            <AvatarFallback>LVG</AvatarFallback>
-                          </Avatar>
-                        </CardHeader>
-                        <CardTitle className="flex justify-center">{idea.title}</CardTitle>
-                        <CardContent>
-                          {idea.description}
-                        </CardContent>
-                      </Card>
-                    </CarouselItem>
-                  ))} */}
-                </CarouselContent>
-              </Carousel>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main >
-        <div className="flex flex-cols-2 items-center h-40 bg-red-600 justify-center">
-        <div className="text-white text-lg">
-          &ldquo;BoreBoard is the epitome of boredom. Join us in celebrating the mundane!&ldquo;
-            <p className="text-white text-center text-sm mt-2">— yhkl</p>
-        </div>
-      </div>
-      <Footer></Footer>
+      {/* <UnsplashBackground></UnsplashBackground> */}
+       {/* <div className="h-screen bg-cover bg-center bg-small-url" > */}
+      {/* <div style={{'var(--image-url)': bgurl}} */}
+  {/* className='bg-[image:var(--image-url)]'> */}
+      {/* </div> */}
+
+       <Image
+                        width={400}
+                        height={400}
+                        className="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                        src={bgurl}
+                        alt=""
+                      />
+
+    <Footer></Footer>
+
     </div>
   );
 }

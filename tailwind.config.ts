@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+       backgroundImage: {
+        "flip": "url('/assets/flip.jpg')",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

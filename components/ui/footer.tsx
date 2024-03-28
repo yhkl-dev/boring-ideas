@@ -1,4 +1,8 @@
 import { Icons } from "@/components/ui/icons"
+import Link from "next/link"
+
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 
 const Footer = () => {
   return (
@@ -29,7 +33,13 @@ const Footer = () => {
             </div>
             <div className="col-span-1 ...">
               <div className="text-base">Community</div>
-              <div className="font-light">About us</div>
+              <div className="font-light">
+                <Link
+                href="/about"
+                >
+                  About us
+                </Link>
+              </div>
               <div className="font-light">Updates</div>
             </div>
             <div className="col-span-1 ...">

@@ -24,7 +24,7 @@ const UnsplashBackground = () => {
   }, []);
 
   return (
-    <div style={{ 'var(--bg-small-url)': bgurl }} className="h-screen bg-cover bg-center bg-small-url" >
+    <div className="h-screen bg-cover bg-center bg-small-url" >
     </div>
   );
 };

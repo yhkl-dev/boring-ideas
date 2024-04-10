@@ -1,13 +1,9 @@
 import { Icons } from "@/components/ui/icons"
 import Link from "next/link"
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-
 const Footer = () => {
   return (
-    <footer>
-
+    <footer className="bg-slate-100">
       <div className="mt-4 grid grid-cols-10 gap-4 px-16 h-36">
         <div className="col-span-5 ...">
           <p className="text-xl font-bold">BOREBOARD</p>

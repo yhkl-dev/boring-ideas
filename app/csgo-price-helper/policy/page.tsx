@@ -4,7 +4,7 @@ export default async function Page() {
       <h1 className="text-3xl font-bold text-center mb-6">CSGO Price Helper Chrome Extension Privacy Policy</h1>
         <section className="mb-4">
           <h2 className="text-2xl font-semibold mb-2">Introduction</h2>
-          <p>This Privacy Policy is designed to transparently disclose how our Chrome Extension (hereinafter referred to as "the Extension") handles user data. We recognize the importance of privacy and are committed to protecting users' privacy rights.</p>
+          <p>This Privacy Policy is designed to transparently disclose how our Chrome Extension (hereinafter referred to as &quot;the Extension&quot;) handles user data. We recognize the importance of privacy and are committed to protecting users&apos; privacy rights.</p>
         </section>
         <section className="mb-4">
           <h2 className="text-2xl font-semibold mb-2">Data Collection and Use</h2>
@@ -24,7 +24,7 @@ export default async function Page() {
         </section>
         <section className="mb-4">
           <h2 className="text-2xl font-semibold mb-2">User Rights</h2>
-          <p>Users can enable or disable our Extension at any time through the browser's extension management features. Since we do not collect any data, users need not worry about issues related to data deletion or access.</p>
+          <p>Users can enable or disable our Extension at any time through the browser&apos;s extension management features. Since we do not collect any data, users need not worry about issues related to data deletion or access.</p>
         </section>
         <section className="mb-4">
           <h2 className="text-2xl font-semibold mb-2">Policy Changes</h2>
